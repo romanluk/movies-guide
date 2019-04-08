@@ -2,15 +2,18 @@ package com.example.moviesguide
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.example.moviesguide.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentInteractionListener {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_trending -> {
-                message.setText(R.string.title_trending)
+                val trendingMoviesFragment = TrendingMoviesFragment.newInstance(2)
+                openFragment(trendingMoviesFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_liked -> {
@@ -30,5 +33,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        val trendingMoviesFragment = TrendingMoviesFragment.newInstance(2)
+        openFragment(trendingMoviesFragment)
+    }
+
+    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
