@@ -2,6 +2,7 @@ package com.example.moviesguide.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.support.v4.view.MotionEventCompat
 import com.example.moviesguide.entities.Movie
 import com.google.gson.Gson
 
@@ -20,6 +21,15 @@ object MoviesPrefs {
         val json = Gson().toJson(movie)
         editor.putString(movie.id.toString(), json)
         editor.commit()
+    }
+
+    fun getMovie(id: String) : Movie? {
+        val jsonStr = preferences.getString(id, "")
+        return if (jsonStr.isNotEmpty()) {
+            Gson().fromJson(jsonStr, Movie::class.java)
+        } else {
+            null
+        }
     }
 
     fun deleteMovie(movie: Movie) {

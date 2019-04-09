@@ -199,7 +199,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/generic_margin"
             android:src="@drawable/ic_favorite_border_white_36dp"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:visibility="visible"/>
 
 </android.support.design.widget.CoordinatorLayout>

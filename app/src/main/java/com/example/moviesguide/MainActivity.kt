@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import com.example.moviesguide.details.MovieDetailsActivity
 import com.example.moviesguide.entities.Movie
 import com.example.moviesguide.liked.LikedMoviesFragment
+import com.example.moviesguide.prefs.MoviesPrefs
 import com.example.moviesguide.trending.TrendingMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentI
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        MoviesPrefs.init(this)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val trendingMoviesFragment = TrendingMoviesFragment.newInstance(2)
