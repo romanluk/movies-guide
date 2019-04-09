@@ -10,7 +10,10 @@ class Movie(
     var voteAverage: Double = 0.0,
 
     @SerializedName("title")
-    var title: String,
+    var movieTitle: String? = null,
+
+    @SerializedName("name")
+    var seriesName: String? = null,
 
     @SerializedName("poster_path")
     var posterPath: String? = null,
@@ -19,7 +22,7 @@ class Movie(
     var backdropPath: String? = null,
 
     @SerializedName("release_date")
-    var releaseDate: String,
+    var releaseDate: String? = null,
 
     @SerializedName("overview")
     var overview: String? = null
@@ -37,6 +40,14 @@ class Movie(
     val absoluteBackdropPath: String
         get() = backdropBaseUrl + backdropPath
 
+    val title: String
+        get() {
+            return when {
+                movieTitle != null -> movieTitle!!
+                seriesName != null -> seriesName!!
+                else -> ""
+            }
+        }
     val isFavorite: Boolean
         get() {
             return MoviesPrefs.getMovie(id.toString()) != null
