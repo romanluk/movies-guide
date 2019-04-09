@@ -1,6 +1,5 @@
 package com.example.moviesguide
 
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import android.widget.TextView
 
 
 import com.example.moviesguide.TrendingMoviesFragment.OnListFragmentInteractionListener
-import com.example.moviesguide.dummy.DummyContent.DummyItem
+import com.example.moviesguide.entities.Movie
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.trending_movie_item.view.*
@@ -21,7 +20,7 @@ import kotlinx.android.synthetic.main.trending_movie_item.view.*
  * TODO: Replace the implementation with code for your data type.
  */
 class TrendingMovieRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
+    private val mValues: List<Movie>,
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<TrendingMovieRecyclerViewAdapter.ViewHolder>() {
 
@@ -29,7 +28,7 @@ class TrendingMovieRecyclerViewAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
+            val item = v.tag as Movie
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
@@ -44,7 +43,7 @@ class TrendingMovieRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        Picasso.get().load(item.posterUri).into(holder.mPosterView)
+        Picasso.get().load(item.absolutePosterPath).into(holder.mPosterView)
         holder.mTitleView.text = item.title
 
         with(holder.mView) {

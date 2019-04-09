@@ -9,9 +9,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.moviesguide.api.MoviesDbApiService
 
-import com.example.moviesguide.dummy.DummyContent
-import com.example.moviesguide.dummy.DummyContent.DummyItem
+import com.example.moviesguide.entities.Movie
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * A fragment representing a list of Items.
@@ -24,6 +27,12 @@ class TrendingMoviesFragment : Fragment() {
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
+
+    private val moviesDbApiService by lazy {
+        MoviesDbApiService.create()
+    }
+
+    private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +55,17 @@ class TrendingMoviesFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = TrendingMovieRecyclerViewAdapter(DummyContent.ITEMS, listener)
+
+                disposable = moviesDbApiService.getTrendingMovies().subscribeOn(Schedulers.io()).
+                    observeOn(AndroidSchedulers.mainThread()).
+                    subscribe { result -> adapter = TrendingMovieRecyclerViewAdapter(result.results, listener)}
             }
         }
         return view
+    }
+
+    fun createAdapter(){
+
     }
 
     override fun onAttach(context: Context) {
@@ -79,7 +95,7 @@ class TrendingMoviesFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: Movie?)
     }
 
     companion object {
