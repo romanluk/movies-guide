@@ -8,10 +8,14 @@ import com.example.moviesguide.details.MovieDetailsActivity
 import com.example.moviesguide.entities.Movie
 import com.example.moviesguide.liked.LikedMoviesFragment
 import com.example.moviesguide.prefs.MoviesPrefs
+import com.example.moviesguide.search.SearchFragment
 import com.example.moviesguide.trending.TrendingMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentInteractionListener, LikedMoviesFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity(),
+    TrendingMoviesFragment.OnListFragmentInteractionListener,
+    LikedMoviesFragment.OnListFragmentInteractionListener,
+    SearchFragment.OnListFragmentInteractionListener {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -26,7 +30,8 @@ class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentI
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
-                message.setText(R.string.title_search)
+                val searchFragment = SearchFragment.newInstance(1)
+                openFragment(searchFragment)
                 return@OnNavigationItemSelectedListener true
             }
         }
