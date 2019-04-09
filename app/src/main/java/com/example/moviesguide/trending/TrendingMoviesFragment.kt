@@ -1,4 +1,4 @@
-package com.example.moviesguide
+package com.example.moviesguide.trending
 
 import android.content.Context
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.moviesguide.R
 import com.example.moviesguide.api.MoviesDbApiService
 
 import com.example.moviesguide.entities.Movie
@@ -58,7 +59,9 @@ class TrendingMoviesFragment : Fragment() {
 
                 disposable = moviesDbApiService.getTrendingMovies().subscribeOn(Schedulers.io()).
                     observeOn(AndroidSchedulers.mainThread()).
-                    subscribe { result -> adapter = TrendingMovieRecyclerViewAdapter(result.results, listener)}
+                    subscribe { result -> adapter =
+                        TrendingMovieRecyclerViewAdapter(result.results, listener)
+                    }
             }
         }
         return view

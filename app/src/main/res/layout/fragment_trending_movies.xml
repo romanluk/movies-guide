@@ -10,5 +10,5 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".TrendingMoviesFragment"
+        tools:context=".trending.TrendingMoviesFragment"
         tools:listitem="@layout/trending_movie_item"/>

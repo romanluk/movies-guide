@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.example.moviesguide.details.MovieDetailsActivity
 import com.example.moviesguide.entities.Movie
+import com.example.moviesguide.trending.TrendingMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentInteractionListener {

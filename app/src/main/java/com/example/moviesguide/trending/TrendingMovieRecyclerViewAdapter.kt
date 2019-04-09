@@ -1,4 +1,4 @@
-package com.example.moviesguide
+package com.example.moviesguide.trending
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.moviesguide.R
 
 
-import com.example.moviesguide.TrendingMoviesFragment.OnListFragmentInteractionListener
+import com.example.moviesguide.trending.TrendingMoviesFragment.OnListFragmentInteractionListener
 import com.example.moviesguide.entities.Movie
 import com.squareup.picasso.Picasso
 
