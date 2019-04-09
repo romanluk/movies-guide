@@ -3,4 +3,6 @@
     <string name="title_trending">Trending</string>
     <string name="title_liked">Liked</string>
     <string name="title_search">Search</string>
+    <string name="overview">Overview</string>
+    <string name="trailers">Trailers</string>
 </resources>

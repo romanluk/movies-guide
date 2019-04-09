@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.example.moviesguide.details.MovieDetailsActivity
 import com.example.moviesguide.entities.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,8 +38,8 @@ class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentI
         openFragment(trendingMoviesFragment)
     }
 
-    override fun onListFragmentInteraction(item: Movie?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onListFragmentInteraction(movieItem: Movie) {
+        startActivity(MovieDetailsActivity.newIntent(this, movieItem))
     }
 
     private fun openFragment(fragment: Fragment) {

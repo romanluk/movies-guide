@@ -95,7 +95,7 @@ class TrendingMoviesFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: Movie?)
+        fun onListFragmentInteraction(item: Movie)
     }
 
     companion object {
