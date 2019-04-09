@@ -12,8 +12,7 @@ import android.view.ViewGroup
 import com.example.moviesguide.R
 import com.example.moviesguide.entities.Movie
 
-import com.example.moviesguide.liked.dummy.DummyContent
-import com.example.moviesguide.liked.dummy.DummyContent.DummyItem
+import com.example.moviesguide.prefs.MoviesPrefs
 
 /**
  * A fragment representing a list of Items.
@@ -48,7 +47,7 @@ class LikedMoviesFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = LikedMovieRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = LikedMovieRecyclerViewAdapter(MoviesPrefs.getAllMovies(), listener)
             }
         }
         return view

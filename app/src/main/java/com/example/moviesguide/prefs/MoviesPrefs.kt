@@ -40,8 +40,8 @@ object MoviesPrefs {
     fun getAllMovies(): List<Movie> {
         val res: MutableList<Movie> = mutableListOf<Movie>()
         val all = preferences.all.values
-        for(movie in all) {
-            res.add(movie as Movie)
+        for(movieJson in all) {
+            res.add(Gson().fromJson(movieJson.toString(), Movie::class.java))
         }
         return res
     }

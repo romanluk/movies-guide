@@ -4,13 +4,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.moviesguide.R
 import com.example.moviesguide.entities.Movie
 
 
 import com.example.moviesguide.liked.LikedMoviesFragment.OnListFragmentInteractionListener
-import com.example.moviesguide.liked.dummy.DummyContent.DummyItem
+import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.liked_movie_item.view.*
 
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.liked_movie_item.view.*
  * TODO: Replace the implementation with code for your data type.
  */
 class LikedMovieRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
+    private val mValues: List<Movie>,
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<LikedMovieRecyclerViewAdapter.ViewHolder>() {
 
@@ -43,8 +44,9 @@ class LikedMovieRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        Picasso.get().load(item.absolutePosterPath).into(holder.mImageView)
+        holder.mTitleView.text = item.title
+        holder.mOverviewView.text = item.overview
 
         with(holder.mView) {
             tag = item
@@ -55,11 +57,12 @@ class LikedMovieRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val mImageView: ImageView = mView.image
+        val mTitleView: TextView = mView.title
+        val mOverviewView: TextView = mView.overview
 
         override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+            return super.toString() + " '" + mTitleView.text + "'"
         }
     }
 }
