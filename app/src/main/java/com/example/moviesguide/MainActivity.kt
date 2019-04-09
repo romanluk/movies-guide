@@ -6,10 +6,11 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.example.moviesguide.details.MovieDetailsActivity
 import com.example.moviesguide.entities.Movie
+import com.example.moviesguide.liked.LikedMoviesFragment
 import com.example.moviesguide.trending.TrendingMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentInteractionListener, LikedMoviesFragment.OnListFragmentInteractionListener {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity(), TrendingMoviesFragment.OnListFragmentI
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_liked -> {
-                message.setText(R.string.title_liked)
+                val likedMoviesFragment = LikedMoviesFragment.newInstance(1)
+                openFragment(likedMoviesFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
