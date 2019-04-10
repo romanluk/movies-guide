@@ -7,8 +7,8 @@
         android:name="com.example.moviesguide.TrendingMoviesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".trending.TrendingMoviesFragment"
         tools:listitem="@layout/trending_movie_item"/>
