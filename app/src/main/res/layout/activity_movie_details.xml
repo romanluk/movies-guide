@@ -185,7 +185,7 @@
                     android:layout_marginEnd="@dimen/generic_margin"
                     android:layout_marginStart="@dimen/generic_margin"
                     android:layout_marginTop="@dimen/sections_margin"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     tools:visibility="visible"/>
 
         </RelativeLayout>

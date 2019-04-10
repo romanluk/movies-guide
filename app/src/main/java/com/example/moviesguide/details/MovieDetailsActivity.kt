@@ -2,19 +2,26 @@ package com.example.moviesguide.details
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import co.lujun.androidtagview.TagContainerLayout
 import com.example.moviesguide.R
+import com.example.moviesguide.api.MoviesDbApiService
 import com.example.moviesguide.entities.Movie
+import com.example.moviesguide.entities.Video
 import com.example.moviesguide.prefs.MoviesPrefs
 import com.squareup.picasso.Picasso
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class MovieDetailsActivity : AppCompatActivity() {
 
@@ -31,8 +38,13 @@ class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var favoriteButtonView: FloatingActionButton
 
     private lateinit var currentMovie: Movie
+//    private lateinit var trailers: List<Video>
 
-//    private var isFavorite = false
+    private val moviesDbApiService by lazy {
+        MoviesDbApiService.create()
+    }
+
+    private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +71,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         favoriteButtonView.setOnClickListener {onFavoriteButtonClick()}
 
         currentMovie = Movie(id, voteAverage, title, title, relativePosterPath, relativeBackDropPath, releaseDate, overview)
+        loadTrailers(id)
         handleFavoriteButtonDrawable()
     }
 
@@ -90,6 +103,25 @@ class MovieDetailsActivity : AppCompatActivity() {
             }
             else
                 ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white_36dp))
+    }
+
+    private fun loadTrailers(movieId: Int){
+        var trailers: List<Video> = listOf()
+        disposable = moviesDbApiService.getTrailersForMovie(movieId).subscribeOn(Schedulers.io()).
+            observeOn(AndroidSchedulers.mainThread()).
+            subscribe {
+                    result -> trailers = result.results
+                    val videosAdapter = VideosAdapter(trailers, this::onVideoSelected)
+                    videosView.layoutManager = LinearLayoutManager(this)
+                    videosView.adapter = videosAdapter
+            }
+    }
+
+    private fun onVideoSelected(video: Video) {
+        video.url?.let {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+            startActivity(browserIntent)
+        }
     }
 
     companion object {

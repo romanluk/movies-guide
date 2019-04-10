@@ -1,12 +1,11 @@
 package com.example.moviesguide.api
 
-import com.example.moviesguide.App
-import com.example.moviesguide.R
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoviesDbApiService {
@@ -19,6 +18,10 @@ interface MoviesDbApiService {
                      @Query("api_key") apiKey: String = "23fd2cb5a330110d4c0c45359415e528")
             : Observable<TrendingMoviesResponseModel.Result>
 
+    @GET("movie/{movieId}/videos")
+    fun getTrailersForMovie(@Path("movieId") movieId: Int,
+                            @Query("api_key") apiKey: String = "23fd2cb5a330110d4c0c45359415e528")
+            : Observable<VideosResponseModel.Result>
 
     companion object {
         fun create(): MoviesDbApiService {

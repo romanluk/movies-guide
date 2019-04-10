@@ -31,7 +31,6 @@ class Movie(
     companion object {
         const val posterBaseUrl = "https://image.tmdb.org/t/p/w342"
         const val backdropBaseUrl = "https://image.tmdb.org/t/p/w780"
-        const val youTubeBaseUrl = "https://www.youtube.com/watch?v="
     }
 
     val absolutePosterPath: String
