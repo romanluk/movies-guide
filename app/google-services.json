@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "656790076188",
+    "firebase_url": "https://movies-guide-28d07.firebaseio.com",
+    "project_id": "movies-guide-28d07",
+    "storage_bucket": "movies-guide-28d07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656790076188:android:25dd32cb8d256fbc",
+        "android_client_info": {
+          "package_name": "com.example.moviesguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656790076188-g2m1bdcads66c7g8ju20cndkd78cn81q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACrdYtFitxR-QfBzdn-VAVmsYOSjf1wJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656790076188-g2m1bdcads66c7g8ju20cndkd78cn81q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
