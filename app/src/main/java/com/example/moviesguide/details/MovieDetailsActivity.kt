@@ -58,7 +58,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         backButtonView.setOnClickListener { finish() }
         favoriteButtonView.setOnClickListener {onFavoriteButtonClick()}
 
-        currentMovie = Movie(id, voteAverage, title, relativePosterPath, relativeBackDropPath, releaseDate, overview)
+        currentMovie = Movie(id, voteAverage, title, title, relativePosterPath, relativeBackDropPath, releaseDate, overview)
         handleFavoriteButtonDrawable()
     }
 
