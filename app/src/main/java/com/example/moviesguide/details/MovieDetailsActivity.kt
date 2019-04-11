@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -109,12 +110,15 @@ class MovieDetailsActivity : AppCompatActivity() {
         var trailers: List<Video> = listOf()
         disposable = moviesDbApiService.getTrailersForMovie(movieId).subscribeOn(Schedulers.io()).
             observeOn(AndroidSchedulers.mainThread()).
-            subscribe {
-                    result -> trailers = result.results
-                    val videosAdapter = VideosAdapter(trailers, this::onVideoSelected)
-                    videosView.layoutManager = LinearLayoutManager(this)
-                    videosView.adapter = videosAdapter
-            }
+                subscribe(
+                    {
+                        result -> trailers = result.results
+                        val videosAdapter = VideosAdapter(trailers, this::onVideoSelected)
+                        videosView.layoutManager = LinearLayoutManager(this)
+                        videosView.adapter = videosAdapter
+                    },
+                    {_ -> Log.d("Movie details", "Error loading trailers")}
+                )
     }
 
     private fun onVideoSelected(video: Video) {
