@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,9 +54,11 @@ class SearchFragment : Fragment(), TextWatcher {
         val searchQuery = s.toString()
         disposable = moviesDbApiService.searchMovies(searchQuery).subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).
-                subscribe {
-                        result -> searchResultsAdapter.setResults(result.results)
-                }
+                subscribe ({
+                    result -> searchResultsAdapter.setResults(result.results)
+                }, {
+                    _ -> Log.d("SearchFragment", "Error during search request")
+                })
     }
 
     override fun onCreateView(
