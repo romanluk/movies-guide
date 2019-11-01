@@ -10,17 +10,17 @@ import retrofit2.http.Query
 
 interface MoviesDbApiService {
     @GET("trending/all/day")
-    fun getTrendingMovies(@Query("api_key") apiKey: String = "23fd2cb5a330110d4c0c45359415e528")
+    fun getTrendingMovies(@Query("api_key") apiKey: String = "api-key")
             : Observable<TrendingMoviesResponseModel.Result>
 
     @GET("search/movie")
     fun searchMovies(@Query("query") query: String,
-                     @Query("api_key") apiKey: String = "23fd2cb5a330110d4c0c45359415e528")
+                     @Query("api_key") apiKey: String = "api-key")
             : Observable<TrendingMoviesResponseModel.Result>
 
     @GET("movie/{movieId}/videos")
     fun getTrailersForMovie(@Path("movieId") movieId: Int,
-                            @Query("api_key") apiKey: String = "23fd2cb5a330110d4c0c45359415e528")
+                            @Query("api_key") apiKey: String = "api-key")
             : Observable<VideosResponseModel.Result>
 
     companion object {
